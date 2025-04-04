@@ -79,8 +79,8 @@
            IDEMPLEADOTEMP > 10
                IF CEDULA(IDEMPLEADOTEMP) = CEDULABUSCA
                    MOVE IDEMPLEADOTEMP TO IDEMPLEADO
+                   EXIT PERFORM
                END-IF
-               ADD 1 TO IDEMPLEADOTEMP
            END-PERFORM.
 
            ADD DeduccionSeguro(IDEMPLEADO)
@@ -94,7 +94,15 @@
 
        MOSTRAR-INFO.
            DISPLAY "INGRESE LA CEDULA DEL USUARIO A CONSULTAR"
-           ACCEPT IDEMPLEADO.
+           ACCEPT CEDULABUSCA.
+
+           PERFORM VARYING IDEMPLEADOTEMP FROM 1 BY 1 UNTIL
+           IDEMPLEADOTEMP > 10
+               IF CEDULA(IDEMPLEADOTEMP) = CEDULABUSCA
+                   MOVE IDEMPLEADOTEMP TO IDEMPLEADO
+                   EXIT PERFORM
+               END-IF
+           END-PERFORM.
 
            DISPLAY "ID del empleado:",CEDULA(IDEMPLEADO).
 
@@ -109,5 +117,5 @@
            DISPLAY "DatosSocioeconómicos (número decimal)."
            ,DatosSocioeconomicos(IDEMPLEADO).
 
-           STOP RUN.
+       STOP RUN.
        END PROGRAM YOUR-PROGRAM-NAME.
